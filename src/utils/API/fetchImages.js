@@ -4,7 +4,7 @@ import Notiflix from 'notiflix';
 const API_KEY = '36382729-c052200aae6cb40748bb0f135';
 const API_URL = 'https://pixabay.com/api/';
 
-async function fetchImages(searchTerm, currentPage) {
+export async function fetchImages(searchTerm, currentPage) {
   try {
     const config = {
       params: {
@@ -19,12 +19,12 @@ async function fetchImages(searchTerm, currentPage) {
     };
 
     const response = await axios.get(API_URL, config);
-    if (response.data.hits.lenght === 0) throw new Error();
+    if (response.data.hits.length === 0) throw new Error();
 
     return response.data.hits;
   } catch (error) {
-    throw Notiflix.Notify.error('Wystąpił błąd podczas pobierania zdjęć.');
+    throw Notiflix.Notify.error(
+      'Niestety nie znaleziono żadnych wyników wyszukania.'
+    );
   }
 }
-
-export default fetchImages;
